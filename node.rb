@@ -1,10 +1,13 @@
 class Node
-  attr_accessor :question, :yes, :no, :parent, :parent_node, :yes_node
+  attr_accessor :question, :yes, :no, :parent, :parent_node, :yes_node,
+  :is_head
   
   def initialize(parent)
-    self.parent = parent
+    self.parent = parent unless parent == 'nil'
+    self.is_head = true
   end
-    def get_parent
+  
+  def get_parent
     self.parent
   end
 
@@ -14,9 +17,9 @@ class Node
     @response = @response == 's' ? true : false
     if(@response)
       self.yes.quest
-    end
     else
       self.no.quest
+    end
   end
 
   def get_question(parent)

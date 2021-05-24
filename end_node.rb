@@ -6,11 +6,12 @@ class EndNode < Node
     super
   end
   def quest()
+    super
     p 'a comida que vc pensou é' + food + '? (digite s para sim e n para nao)'
     @response = gets.chomp
     @response = @response == 's' ? true : false
     if(@response)
-      puts acertei!
+      puts "acertei!"
     else
       @new_node = Node.new(self.get_parent)
       p "Digite qual prato voce pensou"
@@ -19,14 +20,17 @@ class EndNode < Node
       @new_end_node = EndNode.new(self.get_parent)
       @new_end_node.set_food(@prato)
       if self.yes_node
-        self.get_parent_node.set_yes(@new_node)
+        p self.food
+        # @head_node = .get_parent_node
+        # @head_node.set_yes(@new_node)
       else
         self.get_parent.set_no(@new_node)
+        p @head_node
+
       end
       @new_node.set_question(@question)
       @new_node.set_yes(@new_end_node)
       @new_node.set_no(self)
-      Game.start
     end
   end
   
